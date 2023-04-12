@@ -1,108 +1,119 @@
-// section two track input
-let inputContent = document.querySelector('.input-two')
+// Section two track input
+const inputContent = document.querySelector('.input-two')
 
-// seection three track input
-let input1 = document.querySelector('.input1')
-let input2 = document.querySelector('.input2')
-let input3 = document.querySelector('.input3')
-let input1N = document.querySelector('.input1N')
-let input2N = document.querySelector('.input2N')
-let input3N= document.querySelector('.input3N')
+// Section three track input
+const inputFields = {
+  input1: document.querySelector('.input1'),
+  input2: document.querySelector('.input2'),
+  input3: document.querySelector('.input3'),
+  input1N: document.querySelector('.input1N'),
+  input2N: document.querySelector('.input2N'),
+  input3N: document.querySelector('.input3N'),
+}
 
-const bttnInput = document.querySelector('.doneBtn a button')
-const c1 = document.querySelector('.c1')
-const c2 = document.querySelector('.c2')
-const c3 = document.querySelector('.c3')
+const doneBtn = document.querySelector('.doneBtn a button')
+const cBoxes = {
+  c1: document.querySelector('.c1'),
+  c2: document.querySelector('.c2'),
+  c3: document.querySelector('.c3'),
+}
 
-let total = document.querySelector('.bloc1-total p')
+const bloc1Total = document.querySelector('.bloc1-total p')
 
-let inputR1 = document.querySelector('.input1B p')
-let inputR2 = document.querySelector('.input2B p')
-let inputR3 = document.querySelector('.input3B p')
+const inputResults = {
+  inputR1: document.querySelector('.input1B p'),
+  inputR2: document.querySelector('.input2B p'),
+  inputR3: document.querySelector('.input3B p'),
+}
 
-let bloc2V1 = document.querySelector('.bloc2-v1 p')
-let bloc2V2 = document.querySelector('.bloc2-v2 p')
-let bloc2V3 = document.querySelector('.bloc2-v3 p')
+const bloc2Values = {
+  bloc2V1: document.querySelector('.bloc2-v1 p'),
+  bloc2V2: document.querySelector('.bloc2-v2 p'),
+  bloc2V3: document.querySelector('.bloc2-v3 p'),
+}
 
-bttnInput.addEventListener('click', function() {
-    let v1 =(input1.value/1000 *30) * input1N.value 
-    let v2 = (input2.value/1000  *30) * input2N.value
-    let v3 = (input3.value/1000  *30) * input3N.value
-    inputR1.textContent += v1 + "DT"
-    inputR2.textContent += v2 + "DT"
-    inputR3.textContent += v3 + "DT"
-    total.textContent += v1+v2+v3 + "DT"
-    bloc2V1.textContent += inputContent.value - (v1+v2+v3) + 'DT'
-    bloc2V2.textContent += (inputContent.value - (v1+v2+v3))/4 + 'DT'
-    bloc2V3.textContent += (inputContent.value - (v1+v2+v3))/30 + 'DT'
-})
-c1.addEventListener('click', function() {
-    inputR1.textContent = ".rkoub :"
-    inputR2.textContent = ".ftour :"
-    inputR3.textContent = ".do5an :"
-    bloc2V1.textContent = ".fil chhar :"
-    bloc2V2.textContent=".fil jom3a :"
-    bloc2V3.textContent = ".fil nhar :"
-    total.textContent = "total : "
-})
-c2.addEventListener('click', function() {
-    inputR1.textContent = ".rkoub :"
-    inputR2.textContent = ".ftour :"
-    inputR3.textContent = ".do5an :"
-    bloc2V1.textContent = ".fil chhar :"
-    bloc2V2.textContent=".fil jom3a :"
-    bloc2V3.textContent = ".fil nhar :"
-    total.textContent = "total : "
-})
-c3.addEventListener('click', function() {
-    inputR1.textContent = ".rkoub :"
-    inputR2.textContent = ".ftour :"
-    inputR3.textContent = ".do5an :"
-    bloc2V1.textContent = ".fil chhar :"
-    bloc2V2.textContent=".fil jom3a :"
-    bloc2V3.textContent = ".fil nhar :"
-    total.textContent = "total : "
+doneBtn.addEventListener('click', function() {
+  const v1 = (inputFields.input1.value / 1000 * 30) * inputFields.input1N.value 
+  const v2 = (inputFields.input2.value / 1000 * 30) * inputFields.input2N.value
+  const v3 = (inputFields.input3.value / 1000 * 30) * inputFields.input3N.value
+  inputResults.inputR1.textContent += `${v1}DT`
+  inputResults.inputR2.textContent += `${v2}DT`
+  inputResults.inputR3.textContent += `${v3}DT`
+  const total = v1 + v2 + v3
+  bloc1Total.textContent += `${total}DT`
+  bloc2Values.bloc2V1.textContent += `${inputContent.value - total}DT`
+  bloc2Values.bloc2V2.textContent += `${(inputContent.value - total) / 4}DT`
+  bloc2Values.bloc2V3.textContent += `${(inputContent.value - total) / 30}DT`
 })
 
+function resetInputs() {
+  inputResults.inputR1.textContent = '.rkoub :'
+  inputResults.inputR2.textContent = '.ftour :'
+  inputResults.inputR3.textContent = '.do5an :'
+  bloc2Values.bloc2V1.textContent = '.fil chhar :'
+  bloc2Values.bloc2V2.textContent = '.fil jom3a :'
+  bloc2Values.bloc2V3.textContent = '.fil nhar :'
+  bloc1Total.textContent = 'total : '
+}
 
+for (const cBox of Object.values(cBoxes)) {
+  cBox.addEventListener('click', resetInputs)
+}
 
 
 
 
 // Guide#1
-const tips1 = [
-'" Houni il masarif il lezma Rkoub, Ftour, Do5an "',
-'" il case loula t7ot feha soum il haja heki wil case thenya 9adeh min mara te5oha fil nhar "',
-'" exemple: rkoub, 7a9 loage 900 te5oha 2 fil nhar "',
-'" ken fama haja tista3mlhech min hethom 7ot sfer fil les cases "'
-];
+const tips = [
+    '" Houni il masarif il lezma Rkoub, Ftour, Do5an "',
+    '" il case loula t7ot feha soum il haja heki wil case thenya 9adeh min mara te5oha fil nhar "',
+    '" exemple: rkoub, 7a9 loage 900 te5oha 2 fil nhar "',
+    '" ken fama haja tista3mlhech min hethom 7ot sfer fil les cases "'
+  ];
+  
+  const btnP = document.querySelector('.btnP');
+  const btnN = document.querySelector('.btnN');
+  const tipText = document.querySelector('.corner-p');
+  let currentTipIndex = 0;
+  
+  function showTip() {
+    tipText.textContent = tips[currentTipIndex];
+  }
+  
+  btnP.addEventListener('click', function () {
+    currentTipIndex = (currentTipIndex - 1 + tips.length) % tips.length;
+    showTip();
+  });
+  
+  btnN.addEventListener('click', function () {
+    currentTipIndex = (currentTipIndex + 1) % tips.length;
 
-const btnP = document.querySelector('.btnP');
-const btnN = document.querySelector('.btnN');
-const length = tips1.length;
-const tipText = document.querySelector('.corner-p')
-console.log(tipText.textContent)
+    showTip();
+  });
+  
+  showTip();
+  
 
-btnP.addEventListener('click', function () {
-    let i=0;
-    while (i<tips1.length && tipText.textContent != tips1[i]){
-        i++;
-    }
-    if (i>0){
-        tipText.textContent = tips1[i-1]
-    } else {
-        tipText.textContent = tips1[tips1.length-1]
-    }
-})
+  // adding new info
 
-btnN.addEventListener('click', function () {
-    let i=0;
-    while (i<tips1.length && tipText.textContent != tips1[i]){
-        i++;
-    }
-    if (i<tips1.length-1){
-        tipText.textContent = tips1[i+1]
-    } else {
-        tipText.textContent = tips1[0]
-    }
+  const secondRow = document.querySelector("#secondRow");
+const plusDiv = document.querySelector(".plus");
+const hiddenDiv = document.querySelector(".hidden");
+
+plusDiv.addEventListener("click", () => {
+    // Remove the "hidden" class and the "plus" div
+    hiddenDiv.classList.remove("hidden");
+    plusDiv.remove();
+  
+    // Create the new div with inputs and button
+    const formDiv = document.createElement("div");
+    formDiv.innerHTML = `
+      <div class="corner-text1">
+      <button class="hide">x</button>
+      <input class="input-name" type="text" id="name" placeholder="iktib" name="name">
+      <input class="inputText-corner" type="email" id="" name="">
+      <input class="inputNumber-corner" type="number" value="0" name="" id="">
+      </div>
+    `;
+    hiddenDiv.appendChild(formDiv);
 })

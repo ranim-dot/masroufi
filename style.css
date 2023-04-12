@@ -535,6 +535,35 @@ body {
 }
 
 
+.input-name {
+    border: none;
+    font-family:praxis;
+    font-size: 25px;
+    text-decoration-line: underline;
+    text-transform: uppercase;
+    text-align: center;
+    background-color: transparent;
+    font-weight: bold;
+}
+
+.input-name:focus {
+    outline: none;
+}
+
+.hide {
+    cursor: pointer;
+    font-family: bank;
+    font-weight: bold;
+    width: 20px;
+    height: 20px;
+    align-self: flex-end;
+    background-color:lightpink;
+}
+
+.hide:hover {
+    background-color: transparent;
+}
+
 .corner-container1.hidden {
     border:none;
 }
