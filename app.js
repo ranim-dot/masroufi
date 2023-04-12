@@ -96,24 +96,36 @@ const tips = [
 
   // adding new info
 
-  const secondRow = document.querySelector("#secondRow");
-const plusDiv = document.querySelector(".plus");
-const hiddenDiv = document.querySelector(".hidden");
-
-plusDiv.addEventListener("click", () => {
-    // Remove the "hidden" class and the "plus" div
-    hiddenDiv.classList.remove("hidden");
-    plusDiv.remove();
+  const secondRow = document.querySelector(".secondRow");
   
+  
+  function addForm() {
+    // Remove the "hidden" class and the "plus" div
+    const hiddenDiv = document.querySelector(".hidden");
+    document.querySelector(".hidden").classList.remove("hidden");
+    document.querySelector('.plus').remove();
     // Create the new div with inputs and button
     const formDiv = document.createElement("div");
     formDiv.innerHTML = `
-      <div class="corner-text1">
       <button class="hide">x</button>
       <input class="input-name" type="text" id="name" placeholder="iktib" name="name">
       <input class="inputText-corner" type="email" id="" name="">
       <input class="inputNumber-corner" type="number" value="0" name="" id="">
-      </div>
     `;
-    hiddenDiv.appendChild(formDiv);
-})
+    const nextDiv = document.createElement("div");
+    nextDiv.innerHTML = `
+      <div class="plus">+</div>
+    `;
+  
+    // Add event listener to the new "plus" div
+    nextDiv.addEventListener("click", addForm);
+  
+    // Append the new elements
+    hiddenDiv.appendChild(formDiv).setAttribute("class", "corner-text1");
+    secondRow.appendChild(nextDiv).setAttribute("class", "corner-container1 hidden");
+    
+  }
+  
+  // Add initial event listener to the "plus" div
+  document.querySelector(".plus").addEventListener("click", addForm);
+  
