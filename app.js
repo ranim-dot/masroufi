@@ -97,14 +97,14 @@ const tips = [
   // adding new info
 
   const secondRow = document.querySelector(".secondRow");
-  
+ let count=0;
   
   function addForm() {
     // Remove the "hidden" class and the "plus" div
+    count++;
     const hiddenDiv = document.querySelector(".hidden");
     document.querySelector(".hidden").classList.remove("hidden");
     document.querySelector('.plus').remove();
-    // Create the new div with inputs and button
     const formDiv = document.createElement("div");
     formDiv.innerHTML = `
       <button class="hide">x</button>
@@ -119,13 +119,20 @@ const tips = [
   
     // Add event listener to the new "plus" div
     nextDiv.addEventListener("click", addForm);
-  
+    
     // Append the new elements
     hiddenDiv.appendChild(formDiv).setAttribute("class", "corner-text1");
     secondRow.appendChild(nextDiv).setAttribute("class", "corner-container1 hidden");
-    
+    if (count >= 3) {
+      nextDiv.removeEventListener("click", addForm);
+      document.querySelector('.plus').remove();
+      document.querySelector(".hidden").remove();
+    }
   }
   
   // Add initial event listener to the "plus" div
   document.querySelector(".plus").addEventListener("click", addForm);
+  
+
+  
   
