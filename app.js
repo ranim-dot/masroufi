@@ -31,14 +31,72 @@ const bloc2Values = {
   bloc2V2: document.querySelector('.bloc2-v2 p'),
   bloc2V3: document.querySelector('.bloc2-v3 p'),
 }
+ 
+// adding new info
 
+ const secondRow = document.querySelector(".secondRow");
+ let count=0;
+ let formData = []
+  
+  function addForm() {
+    // Remove the "hidden" class and the "plus" div
+    count++;
+    const hiddenDiv = document.querySelector(".hidden");
+    document.querySelector(".hidden").classList.remove("hidden");
+    document.querySelector('.plus').remove();
+    const formDiv = document.createElement("div");
+    formDiv.innerHTML = `
+      <button class="hide">x</button>
+      <input class="input-name input${count}T" type="text" id="name" placeholder="iktib" name="name">
+      <input class="inputText-corner input${count}A" type="text" id="" name="">
+      <input class="inputNumber-corner input${count}AN" type="number" value="0" name="" id="">
+    `;
+    const nextDiv = document.createElement("div");
+    nextDiv.innerHTML = `
+      <div class="plus">+</div>
+    `;
+  
+    // Add event listener to the new "plus" div
+    nextDiv.addEventListener("click", addForm);
+    
+    // Append the new elements
+    hiddenDiv.appendChild(formDiv).setAttribute("class", "corner-text1");
+    secondRow.appendChild(nextDiv).setAttribute("class", "corner-container1 hidden");
+
+    // Add event listeners to each input element to store its value into the formData object
+  let obj = {
+    inputTitle : document.querySelector(`.input${count}T`),
+    inputAdded : document.querySelector(`.input${count}A`),
+    inputANumber : document.querySelector(`.input${count}AN`),
+  }
+
+  formData.push(obj)
+    if (count >= 3) {
+      nextDiv.removeEventListener("click", addForm);
+      document.querySelector('.plus').remove();
+      document.querySelector(".hidden").remove();
+    }
+  }
+  
+  // Add initial event listener to the "plus" div
+  document.querySelector(".plus").addEventListener("click", addForm);
+
+  // Calculation
+    
 doneBtn.addEventListener('click', function() {
   const v1 = (inputFields.input1.value / 1000 * 30) * inputFields.input1N.value 
   const v2 = (inputFields.input2.value / 1000 * 30) * inputFields.input2N.value
   const v3 = (inputFields.input3.value / 1000 * 30) * inputFields.input3N.value
+  let v = []
+  for (let i=0;i<formData.length-1;i++){
+    vN =(formData[i].inputAdded.value / 1000 * 30)* formData[i].inputANumber.value
+    v.push(vN)
+  }
+  console.log(v)
   inputResults.inputR1.textContent += `${v1}DT`
   inputResults.inputR2.textContent += `${v2}DT`
   inputResults.inputR3.textContent += `${v3}DT`
+  
   const total = v1 + v2 + v3
   bloc1Total.textContent += `${total}DT`
   bloc2Values.bloc2V1.textContent += `${inputContent.value - total}DT`
@@ -94,44 +152,7 @@ const tips = [
   showTip();
   
 
-  // adding new info
-
-  const secondRow = document.querySelector(".secondRow");
- let count=0;
-  
-  function addForm() {
-    // Remove the "hidden" class and the "plus" div
-    count++;
-    const hiddenDiv = document.querySelector(".hidden");
-    document.querySelector(".hidden").classList.remove("hidden");
-    document.querySelector('.plus').remove();
-    const formDiv = document.createElement("div");
-    formDiv.innerHTML = `
-      <button class="hide">x</button>
-      <input class="input-name" type="text" id="name" placeholder="iktib" name="name">
-      <input class="inputText-corner" type="email" id="" name="">
-      <input class="inputNumber-corner" type="number" value="0" name="" id="">
-    `;
-    const nextDiv = document.createElement("div");
-    nextDiv.innerHTML = `
-      <div class="plus">+</div>
-    `;
-  
-    // Add event listener to the new "plus" div
-    nextDiv.addEventListener("click", addForm);
-    
-    // Append the new elements
-    hiddenDiv.appendChild(formDiv).setAttribute("class", "corner-text1");
-    secondRow.appendChild(nextDiv).setAttribute("class", "corner-container1 hidden");
-    if (count >= 3) {
-      nextDiv.removeEventListener("click", addForm);
-      document.querySelector('.plus').remove();
-      document.querySelector(".hidden").remove();
-    }
-  }
-  
-  // Add initial event listener to the "plus" div
-  document.querySelector(".plus").addEventListener("click", addForm);
+ 
   
 
   
